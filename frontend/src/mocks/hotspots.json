@@ -1,0 +1,175 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [77.281, 30.129] },
+      "properties": {
+        "id": "hs-001",
+        "category": "water_supply",
+        "constituency": "yamuna-nagar",
+        "cluster_size": 62,
+        "report_count": 62,
+        "last_report_date": "2026-07-06",
+        "top_complaints": [
+          "No piped water for four days straight in Model Town.",
+          "Tanker only comes once a week, not enough for the block.",
+          "Pressure is too low to reach the upper floors."
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [77.295, 30.142] },
+      "properties": {
+        "id": "hs-002",
+        "category": "road_damage",
+        "constituency": "yamuna-nagar",
+        "cluster_size": 41,
+        "report_count": 41,
+        "last_report_date": "2026-07-05",
+        "top_complaints": [
+          "Potholes near the market have caused two bike accidents this month.",
+          "Road hasn't been repaved since before the last election.",
+          "Flooding turns the street into a river every monsoon."
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [76.7767, 30.3782] },
+      "properties": {
+        "id": "hs-003",
+        "category": "electricity",
+        "constituency": "ambala",
+        "cluster_size": 55,
+        "report_count": 55,
+        "last_report_date": "2026-07-07",
+        "top_complaints": [
+          "Power cuts lasting 6+ hours every afternoon this week.",
+          "Transformer near the school has been sparking for days.",
+          "No advance notice given before scheduled outages."
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [76.79, 30.365] },
+      "properties": {
+        "id": "hs-004",
+        "category": "waste_management",
+        "constituency": "ambala",
+        "cluster_size": 28,
+        "report_count": 28,
+        "last_report_date": "2026-07-03",
+        "top_complaints": [
+          "Garbage truck hasn't come to our lane in over a week.",
+          "Overflowing bins are attracting stray animals.",
+          "Burning of waste at night is causing breathing problems."
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [76.8783, 29.9695] },
+      "properties": {
+        "id": "hs-005",
+        "category": "drainage",
+        "constituency": "kurukshetra",
+        "cluster_size": 47,
+        "report_count": 47,
+        "last_report_date": "2026-07-06",
+        "top_complaints": [
+          "Open drain outside the temple floods the lane after every rain.",
+          "Mosquito breeding has gotten worse since the drain clogged.",
+          "Water enters ground-floor homes during heavy rain."
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [76.9905, 29.6857] },
+      "properties": {
+        "id": "hs-006",
+        "category": "street_lighting",
+        "constituency": "karnal",
+        "cluster_size": 19,
+        "report_count": 19,
+        "last_report_date": "2026-07-02",
+        "top_complaints": [
+          "Entire stretch near the bus stand has been dark for a month.",
+          "Women in the colony avoid walking home after dusk.",
+          "Two street lamps have been leaning dangerously since the storm."
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [76.9635, 29.3909] },
+      "properties": {
+        "id": "hs-007",
+        "category": "road_damage",
+        "constituency": "panipat",
+        "cluster_size": 33,
+        "report_count": 33,
+        "last_report_date": "2026-07-04",
+        "top_complaints": [
+          "Main road connecting to the highway has a growing sinkhole.",
+          "Truck traffic has cracked the road surface badly.",
+          "No barricades placed around the dangerous section."
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [77.0151, 28.9931] },
+      "properties": {
+        "id": "hs-008",
+        "category": "water_supply",
+        "constituency": "sonipat",
+        "cluster_size": 24,
+        "report_count": 24,
+        "last_report_date": "2026-07-01",
+        "top_complaints": [
+          "Borewell water has turned visibly discoloured this week.",
+          "Supply timing changed with no public notice.",
+          "Several households report a strong smell from tap water."
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [76.6066, 28.8955] },
+      "properties": {
+        "id": "hs-009",
+        "category": "electricity",
+        "constituency": "rohtak",
+        "cluster_size": 38,
+        "report_count": 38,
+        "last_report_date": "2026-07-06",
+        "top_complaints": [
+          "Voltage fluctuations have damaged appliances in three homes.",
+          "New connection request pending for over two months.",
+          "Meter reading has been wrong for the last two billing cycles."
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [75.7217, 29.1492] },
+      "properties": {
+        "id": "hs-010",
+        "category": "waste_management",
+        "constituency": "hisar",
+        "cluster_size": 15,
+        "report_count": 15,
+        "last_report_date": "2026-06-29",
+        "top_complaints": [
+          "No segregated collection despite the new civic guidelines.",
+          "Dump site near the residential block is expanding.",
+          "Requests for an additional bin have gone unanswered."
+        ]
+      }
+    }
+  ]
+}
