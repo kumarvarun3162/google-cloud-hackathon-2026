@@ -24,7 +24,9 @@ from datetime import datetime, timezone
 from typing import Any
 
 import firebase_admin
-from firebase_admin import credentials, firestore
+from firebase_admin import credentials
+from google.cloud import firestore_v1
+from google.oauth2 import service_account
 
 from app.models.schemas import OverrideRequest, SubmissionResponse
 from app.utils.config import get_settings
@@ -32,34 +34,51 @@ from app.utils.config import get_settings
 logger = logging.getLogger(__name__)
 
 
-def _init_firebase() -> firestore.AsyncClient | None:
+def _init_firebase() -> firestore_v1.AsyncClient | None:
     """
-    Initialise Firebase Admin SDK.
-    Returns None in development if credentials file is missing —
-    allows local development without Firebase configured.
+    Initialise Firebase Admin SDK and return an authenticated
+    Firestore AsyncClient.
+
+    In development, if the credentials file is missing,
+    fall back to local mode.
     """
+
     cfg = get_settings()
     cred_path = cfg.firebase_credentials_path
+
+    logger.info("Firebase credentials: %s", cred_path)
 
     if not os.path.exists(cred_path):
         if cfg.is_development:
             logger.warning(
-                "Firebase credentials not found at %s. "
-                "Running in LOCAL mode — submissions will not be persisted.",
-                cred_path,
+                "Firebase credentials not found. "
+                "Running in LOCAL mode."
             )
             return None
+
         raise FileNotFoundError(
-            f"Firebase credentials not found: {cred_path}. "
-            "Set FIREBASE_CREDENTIALS_PATH in .env"
+            f"Firebase credentials not found: {cred_path}"
         )
 
+    # Initialize Firebase Admin once
     if not firebase_admin._apps:
-        cred = credentials.Certificate(cred_path)
-        firebase_admin.initialize_app(cred)
+        firebase_admin.initialize_app(
+            credentials.Certificate(cred_path)
+        )
 
-    return firestore.AsyncClient(project=cfg.firebase_project_id)
+    # Explicit credentials for Async Firestore
+    google_creds = service_account.Credentials.from_service_account_file(
+        cred_path
+    )
 
+    db = firestore_v1.AsyncClient(
+        project=cfg.firebase_project_id,
+        credentials=google_creds,
+    )
+
+    logger.info("Connected to Firestore project: %s", cfg.firebase_project_id)
+
+    return db
 
 class FirebaseService:
     """
@@ -141,7 +160,7 @@ class FirebaseService:
         await doc_ref.update({
             override_field_path: req.corrected_value,
             override_by_path: req.override_by,
-            "metadata.flags": firestore.ArrayUnion(["override_applied"]),
+            "metadata.flags": firestore_v1.ArrayUnion(["override_applied"]),
         })
 
         # Write audit log to subcollection
