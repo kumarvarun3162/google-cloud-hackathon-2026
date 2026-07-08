@@ -1,0 +1,199 @@
+{
+  "stats": {
+    "total_submissions_week": 342,
+    "top_category": "water_supply",
+    "top_location": "Yamuna Nagar"
+  },
+  "items": [
+    {
+      "id": "pr-001",
+      "hotspot_id": "hs-001",
+      "rank": 1,
+      "title": "No piped water supply for four days in Model Town",
+      "category": "water_supply",
+      "constituency": "yamuna-nagar",
+      "location": "Model Town, Yamuna Nagar",
+      "report_count": 62,
+      "priority_score": 91,
+      "ai_explanation": "Reports have tripled in two weeks and cluster tightly around one failed pumping station, suggesting a single fixable cause behind most of the complaints.",
+      "detail": {
+        "trend": "up",
+        "affected_population": 8400,
+        "infrastructure_gap": "severe",
+        "distance_to_facility_km": 1.2,
+        "recommended_action": "Inspect the Model Town pumping station; residents report the outage began after a reported equipment failure."
+      }
+    },
+    {
+      "id": "pr-002",
+      "hotspot_id": "hs-003",
+      "rank": 2,
+      "title": "Extended power cuts near Ambala school zone",
+      "category": "electricity",
+      "constituency": "ambala",
+      "location": "School Zone, Ambala",
+      "report_count": 55,
+      "priority_score": 87,
+      "ai_explanation": "A sparking transformer near a school raises the safety stakes well above a typical outage complaint, warranting faster-than-usual attention.",
+      "detail": {
+        "trend": "up",
+        "affected_population": 6100,
+        "infrastructure_gap": "severe",
+        "distance_to_facility_km": 0.4,
+        "recommended_action": "Prioritise the transformer inspection given its proximity to a school and reports of visible sparking."
+      }
+    },
+    {
+      "id": "pr-003",
+      "hotspot_id": "hs-005",
+      "rank": 3,
+      "title": "Open drain flooding lanes near Kurukshetra temple",
+      "category": "drainage",
+      "constituency": "kurukshetra",
+      "location": "Temple Road, Kurukshetra",
+      "report_count": 47,
+      "priority_score": 78,
+      "ai_explanation": "Recurring flooding after every rainfall points to a structural blockage rather than a one-off event, and mosquito-related health complaints are rising alongside it.",
+      "detail": {
+        "trend": "steady",
+        "affected_population": 5200,
+        "infrastructure_gap": "moderate",
+        "distance_to_facility_km": 2.1,
+        "recommended_action": "Schedule a drain-clearing crew before the next forecasted rainfall to prevent repeat flooding."
+      }
+    },
+    {
+      "id": "pr-004",
+      "hotspot_id": "hs-002",
+      "rank": 4,
+      "title": "Deteriorating market road causing accidents",
+      "category": "road_damage",
+      "constituency": "yamuna-nagar",
+      "location": "Market Road, Yamuna Nagar",
+      "report_count": 41,
+      "priority_score": 74,
+      "ai_explanation": "Two reported accidents in a month elevate this from routine road maintenance to a safety issue that's likely to keep escalating if left unaddressed.",
+      "detail": {
+        "trend": "up",
+        "affected_population": 4700,
+        "infrastructure_gap": "moderate",
+        "distance_to_facility_km": 0.8,
+        "recommended_action": "Fill the reported potholes and consider temporary signage until repaving can be scheduled."
+      }
+    },
+    {
+      "id": "pr-005",
+      "hotspot_id": "hs-009",
+      "rank": 5,
+      "title": "Voltage fluctuations damaging appliances in Rohtak",
+      "category": "electricity",
+      "constituency": "rohtak",
+      "location": "Sector 4, Rohtak",
+      "report_count": 38,
+      "priority_score": 69,
+      "ai_explanation": "Appliance damage and billing errors reported together suggest a metering or transformer fault rather than isolated complaints.",
+      "detail": {
+        "trend": "steady",
+        "affected_population": 3900,
+        "infrastructure_gap": "moderate",
+        "distance_to_facility_km": 1.6,
+        "recommended_action": "Send a technician to audit the local transformer and cross-check recent meter readings."
+      }
+    },
+    {
+      "id": "pr-006",
+      "hotspot_id": "hs-007",
+      "rank": 6,
+      "title": "Growing sinkhole on Panipat highway connector",
+      "category": "road_damage",
+      "constituency": "panipat",
+      "location": "Highway Connector, Panipat",
+      "report_count": 33,
+      "priority_score": 66,
+      "ai_explanation": "The absence of any barricading around a growing sinkhole on a truck route makes this more urgent than its report count alone would suggest.",
+      "detail": {
+        "trend": "up",
+        "affected_population": 3100,
+        "infrastructure_gap": "severe",
+        "distance_to_facility_km": 3.4,
+        "recommended_action": "Place temporary barricades immediately and fast-track a structural assessment."
+      }
+    },
+    {
+      "id": "pr-007",
+      "hotspot_id": "hs-004",
+      "rank": 7,
+      "title": "Uncollected garbage overflowing in Ambala lanes",
+      "category": "waste_management",
+      "constituency": "ambala",
+      "location": "Residential Lanes, Ambala",
+      "report_count": 28,
+      "priority_score": 58,
+      "ai_explanation": "A week-long gap in collection has let waste accumulate to the point of attracting stray animals, a level residents haven't reported before.",
+      "detail": {
+        "trend": "steady",
+        "affected_population": 2600,
+        "infrastructure_gap": "moderate",
+        "distance_to_facility_km": 2.9,
+        "recommended_action": "Re-route the collection truck to cover the missed lane this week."
+      }
+    },
+    {
+      "id": "pr-008",
+      "hotspot_id": "hs-008",
+      "rank": 8,
+      "title": "Discoloured borewell water reported in Sonipat",
+      "category": "water_supply",
+      "constituency": "sonipat",
+      "location": "Sector 12, Sonipat",
+      "report_count": 24,
+      "priority_score": 52,
+      "ai_explanation": "Reports of discolouration and odour together are consistent with contamination rather than a cosmetic issue, so this merits a water quality test.",
+      "detail": {
+        "trend": "up",
+        "affected_population": 2200,
+        "infrastructure_gap": "moderate",
+        "distance_to_facility_km": 4.1,
+        "recommended_action": "Commission a water quality test at the affected borewell before advising residents further."
+      }
+    },
+    {
+      "id": "pr-009",
+      "hotspot_id": "hs-006",
+      "rank": 9,
+      "title": "Dark stretch near Karnal bus stand raises safety concerns",
+      "category": "street_lighting",
+      "constituency": "karnal",
+      "location": "Bus Stand Road, Karnal",
+      "report_count": 19,
+      "priority_score": 45,
+      "ai_explanation": "Reports specifically mention women avoiding the route after dark, which raises the social cost of this repair above a typical lighting complaint.",
+      "detail": {
+        "trend": "steady",
+        "affected_population": 1800,
+        "infrastructure_gap": "moderate",
+        "distance_to_facility_km": 5.6,
+        "recommended_action": "Replace the two leaning lamp posts and restore the darkened stretch as a single job."
+      }
+    },
+    {
+      "id": "pr-010",
+      "hotspot_id": "hs-010",
+      "rank": 10,
+      "title": "No segregated waste collection in Hisar block",
+      "category": "waste_management",
+      "constituency": "hisar",
+      "location": "Civic Block, Hisar",
+      "report_count": 15,
+      "priority_score": 34,
+      "ai_explanation": "This reflects a policy gap rather than an acute failure, so it can likely be scheduled alongside routine service planning.",
+      "detail": {
+        "trend": "down",
+        "affected_population": 1400,
+        "infrastructure_gap": "minor",
+        "distance_to_facility_km": 6.8,
+        "recommended_action": "Add the block to the next segregated-collection rollout phase."
+      }
+    }
+  ]
+}

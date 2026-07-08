@@ -4,6 +4,7 @@
 // in src/lib/api.js, not a rewrite of any component.
 
 import hotspotsData from "./hotspots.json";
+import prioritiesData from "./priorities.json";
 
 const STORAGE_KEY = "citizenpriority_mock_submissions";
 
@@ -82,4 +83,34 @@ export async function mockGetHotspots(filters = {}) {
   });
 
   return { type: "FeatureCollection", features };
+}
+
+/**
+ * Mirrors GET /api/priorities. This endpoint is intentionally slow (per the
+ * real backend, which runs clustering + an LLM explanation pass) — the mock
+ * mirrors that with a 1.8–3s delay so the loading skeleton actually gets
+ * exercised during development instead of flashing for 50ms.
+ */
+export async function mockGetPriorities() {
+  await delay(1800 + Math.random() * 1200);
+  return prioritiesData;
+}
+
+/**
+ * Mirrors GET /api/compare?a={id}&b={id}. Pulls both records from the same
+ * priorities dataset rather than a separate mock — a comparison is just two
+ * priority items viewed side by side, not a distinct entity with its own
+ * source of truth.
+ */
+export async function mockCompareProjects(aId, bId) {
+  await delay(500 + Math.random() * 400);
+
+  const a = prioritiesData.items.find((item) => item.id === aId);
+  const b = prioritiesData.items.find((item) => item.id === bId);
+
+  if (!a || !b) {
+    throw new Error("project_not_found");
+  }
+
+  return { a, b };
 }

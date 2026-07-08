@@ -60,3 +60,17 @@ body {
 .ticket-perforation {
   border-left: 2px dashed rgba(15, 97, 114, 0.25);
 }
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-target,
+  .print-target * {
+    visibility: visible;
+  }
+  .print-target {
+    position: absolute;
+    inset: 0;
+  }
+}

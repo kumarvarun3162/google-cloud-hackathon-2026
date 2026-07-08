@@ -1,4 +1,4 @@
-import { mockSubmitReport, mockGetHotspots } from "../mocks/api";
+import { mockSubmitReport, mockGetHotspots, mockGetPriorities, mockCompareProjects } from "../mocks/api";
 
 // Once the FastAPI backend has a real URL, set VITE_API_BASE_URL in a
 // .env.local file and this switches over automatically — no component
@@ -34,6 +34,35 @@ export async function getHotspots(filters = {}) {
 
   if (!response.ok) {
     throw new Error(`hotspots_failed_${response.status}`);
+  }
+
+  return response.json();
+}
+
+export async function getPriorities() {
+  if (!BASE_URL) {
+    return mockGetPriorities();
+  }
+
+  const response = await fetch(`${BASE_URL}/api/priorities`);
+
+  if (!response.ok) {
+    throw new Error(`priorities_failed_${response.status}`);
+  }
+
+  return response.json();
+}
+
+export async function compareProjects(aId, bId) {
+  if (!BASE_URL) {
+    return mockCompareProjects(aId, bId);
+  }
+
+  const params = new URLSearchParams({ a: aId, b: bId });
+  const response = await fetch(`${BASE_URL}/api/compare?${params}`);
+
+  if (!response.ok) {
+    throw new Error(`compare_failed_${response.status}`);
   }
 
   return response.json();
