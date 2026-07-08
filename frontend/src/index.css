@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette — deep teal + marigold accent, cool-white surface */
+  --color-ink: #0B2027;
+  --color-primary: #0F6172;
+  --color-primary-dark: #0A4753;
+  --color-primary-light: #E6F1F2;
+  --color-accent: #E98A15;
+  --color-accent-dark: #C06F0A;
+  --color-surface: #F7F9F8;
+  --color-success: #1F9D65;
+  --color-muted: #4B5B60;
+
+  --font-display: "Space Grotesk", "Noto Sans", sans-serif;
+  --font-body: "Noto Sans", "Noto Sans Devanagari", "Noto Sans Gurmukhi", "Noto Sans Telugu", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+html {
+  font-family: var(--font-body);
+}
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+}
+
+/* Perforated "ticket stub" edge for the confirmation card signature element */
+.ticket-stub {
+  position: relative;
+}
+
+.ticket-stub::before {
+  content: "";
+  position: absolute;
+  left: -14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  background: var(--color-surface);
+  box-shadow: inset 0 0 0 2px rgba(15, 97, 114, 0.15);
+}
+
+.ticket-stub::after {
+  content: "";
+  position: absolute;
+  right: -14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  background: var(--color-surface);
+  box-shadow: inset 0 0 0 2px rgba(15, 97, 114, 0.15);
+}
+
+.ticket-perforation {
+  border-left: 2px dashed rgba(15, 97, 114, 0.25);
+}
