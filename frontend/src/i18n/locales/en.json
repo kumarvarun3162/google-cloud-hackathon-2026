@@ -1,0 +1,42 @@
+{
+  "app": {
+    "name": "CitizenPriority"
+  },
+  "submit": {
+    "eyebrow": "Report a local issue",
+    "title": "Tell us what needs fixing",
+    "subtitle": "Your report goes straight to your MP's office. It takes about two minutes.",
+    "name_label": "Your name (optional)",
+    "name_placeholder": "e.g. Aarav Sharma",
+    "name_hint": "Leave blank to report anonymously.",
+    "constituency_label": "Constituency",
+    "constituency_placeholder": "Select your constituency",
+    "type_label": "How would you like to report?",
+    "type_voice": "Voice note",
+    "type_text": "Write it out",
+    "type_photo": "Photo",
+    "language_label": "Language of your report",
+    "text_label": "Describe the issue",
+    "text_placeholder": "What's the problem, and where exactly is it?",
+    "voice_label": "Record or upload a voice note",
+    "voice_hint": "MP3, M4A or WAV, up to 10 minutes.",
+    "photo_label": "Upload a photo",
+    "photo_hint": "JPG or PNG, up to 10MB. Add a short caption if you can.",
+    "photo_caption_placeholder": "Caption (optional)",
+    "file_choose": "Choose file",
+    "file_none": "No file selected",
+    "submit_button": "Submit report",
+    "submitting": "Submitting…",
+    "error_constituency": "Please select your constituency.",
+    "error_text": "Please describe the issue.",
+    "error_file": "Please attach a file.",
+    "error_generic": "Something went wrong. Please try again.",
+    "success_title": "Report received",
+    "success_body": "Your report has been logged and will be reviewed by your MP's office.",
+    "ticket_label": "Your ticket number",
+    "success_new": "Submit another report"
+  },
+  "language_switcher": {
+    "label": "App language"
+  }
+}

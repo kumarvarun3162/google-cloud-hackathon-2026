@@ -1,0 +1,10 @@
+[
+  { "id": "yamuna-nagar", "name": "Yamuna Nagar" },
+  { "id": "ambala", "name": "Ambala" },
+  { "id": "kurukshetra", "name": "Kurukshetra" },
+  { "id": "karnal", "name": "Karnal" },
+  { "id": "panipat", "name": "Panipat" },
+  { "id": "sonipat", "name": "Sonipat" },
+  { "id": "rohtak", "name": "Rohtak" },
+  { "id": "hisar", "name": "Hisar" }
+]
