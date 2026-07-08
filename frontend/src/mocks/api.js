@@ -4,6 +4,7 @@
 // in src/lib/api.js, not a rewrite of any component.
 
 import hotspotsData from "./hotspots.json";
+import prioritiesData from "./priorities.json";
 
 const STORAGE_KEY = "citizenpriority_mock_submissions";
 
@@ -82,4 +83,15 @@ export async function mockGetHotspots(filters = {}) {
   });
 
   return { type: "FeatureCollection", features };
+}
+
+/**
+ * Mirrors GET /api/priorities. This endpoint is intentionally slow (per the
+ * real backend, which runs clustering + an LLM explanation pass) — the mock
+ * mirrors that with a 1.8–3s delay so the loading skeleton actually gets
+ * exercised during development instead of flashing for 50ms.
+ */
+export async function mockGetPriorities() {
+  await delay(1800 + Math.random() * 1200);
+  return prioritiesData;
 }
