@@ -80,5 +80,29 @@
     "sidebar_top_complaints": "शीर्ष शिकायत अंश",
     "sidebar_view_priority": "प्राथमिकता सूची में देखें",
     "sidebar_close": "बंद करें"
+  },
+  "priorities": {
+    "eyebrow": "सांसद प्राथमिकता डैशबोर्ड",
+    "title": "इस सप्ताह की प्राथमिकताएं",
+    "stats_total": "इस सप्ताह की शिकायतें",
+    "stats_top_category": "शीर्ष श्रेणी",
+    "stats_top_location": "शीर्ष स्थान",
+    "score_label": "प्राथमिकता स्कोर",
+    "reports_label": "रिपोर्ट",
+    "expand_more": "विवरण दिखाएं",
+    "expand_less": "विवरण छुपाएं",
+    "detail_population": "अनुमानित प्रभावित लोग",
+    "detail_infra_gap": "अवसंरचना अंतर",
+    "detail_distance": "निकटतम सुविधा की दूरी",
+    "detail_trend": "रुझान",
+    "detail_recommended": "सुझाई गई कार्रवाई",
+    "gap_severe": "गंभीर",
+    "gap_moderate": "मध्यम",
+    "gap_minor": "मामूली",
+    "trend_up": "बढ़ रहा है",
+    "trend_steady": "स्थिर",
+    "trend_down": "घट रहा है",
+    "error": "प्राथमिकता सूची लोड नहीं हो सकी। पुनः प्रयास करें।",
+    "highlighted_banner": "मैप से खोला गया क्लस्टर दिखाया जा रहा है।"
   }
 }
