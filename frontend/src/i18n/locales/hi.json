@@ -38,5 +38,47 @@
   },
   "language_switcher": {
     "label": "ऐप की भाषा"
+  },
+  "auth": {
+    "title": "सांसद डैशबोर्ड साइन इन",
+    "subtitle": "केवल निर्वाचन क्षेत्र कार्यालय के उपयोग हेतु।",
+    "email_label": "ईमेल",
+    "password_label": "पासवर्ड",
+    "sign_in": "साइन इन करें",
+    "signing_in": "साइन इन हो रहा है…",
+    "error": "गलत ईमेल या पासवर्ड।",
+    "demo_hint": "डेमो लॉगिन: mp@citizenpriority.gov / demo1234"
+  },
+  "nav": {
+    "map": "हॉटस्पॉट मैप",
+    "priorities": "प्राथमिकता सूची",
+    "logout": "साइन आउट"
+  },
+  "categories": {
+    "water_supply": "जल आपूर्ति",
+    "road_damage": "सड़क क्षति",
+    "electricity": "बिजली",
+    "drainage": "जल निकासी",
+    "waste_management": "कचरा प्रबंधन",
+    "street_lighting": "स्ट्रीट लाइटिंग"
+  },
+  "map": {
+    "loading": "हॉटस्पॉट लोड हो रहे हैं…",
+    "error": "हॉटस्पॉट लोड नहीं हो सके। पुनः प्रयास करें।",
+    "missing_key_title": "Google Maps API कुंजी आवश्यक है",
+    "missing_key_body": "मैप दिखाने के लिए .env.local फ़ाइल में VITE_GOOGLE_MAPS_API_KEY जोड़ें।",
+    "filter_category": "श्रेणी",
+    "filter_category_all": "सभी श्रेणियाँ",
+    "filter_constituency": "निर्वाचन क्षेत्र",
+    "filter_constituency_all": "सभी निर्वाचन क्षेत्र",
+    "filter_from": "से",
+    "filter_to": "तक",
+    "filter_clear": "फ़िल्टर हटाएं",
+    "filter_empty": "इन फ़िल्टर से कोई हॉटस्पॉट मेल नहीं खाता।",
+    "sidebar_reports": "रिपोर्ट",
+    "sidebar_last_updated": "अंतिम रिपोर्ट",
+    "sidebar_top_complaints": "शीर्ष शिकायत अंश",
+    "sidebar_view_priority": "प्राथमिकता सूची में देखें",
+    "sidebar_close": "बंद करें"
   }
 }

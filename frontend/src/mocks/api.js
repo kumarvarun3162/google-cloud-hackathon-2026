@@ -3,6 +3,8 @@
 // pattern — so swapping to the FastAPI backend later is a one-file change
 // in src/lib/api.js, not a rewrite of any component.
 
+import hotspotsData from "./hotspots.json";
+
 const STORAGE_KEY = "citizenpriority_mock_submissions";
 
 function readStore() {
@@ -58,4 +60,26 @@ export async function mockSubmitReport(formData) {
   writeStore([...readStore(), record]);
 
   return { ticket, status: "received" };
+}
+
+/**
+ * Mirrors GET /api/hotspots?category=&constituency=&from=&to=
+ * Filtering is done here to mimic what the real backend will do server-side
+ * — the component just passes a filters object and gets back a filtered
+ * FeatureCollection, no client-side filtering logic to port over later.
+ * @param {{category?: string, constituency?: string, from?: string, to?: string}} filters
+ */
+export async function mockGetHotspots(filters = {}) {
+  await delay(500 + Math.random() * 400);
+
+  const features = hotspotsData.features.filter((f) => {
+    const p = f.properties;
+    if (filters.category && p.category !== filters.category) return false;
+    if (filters.constituency && p.constituency !== filters.constituency) return false;
+    if (filters.from && p.last_report_date < filters.from) return false;
+    if (filters.to && p.last_report_date > filters.to) return false;
+    return true;
+  });
+
+  return { type: "FeatureCollection", features };
 }

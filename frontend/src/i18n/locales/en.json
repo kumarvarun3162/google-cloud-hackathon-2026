@@ -38,5 +38,47 @@
   },
   "language_switcher": {
     "label": "App language"
+  },
+  "auth": {
+    "title": "MP Dashboard sign in",
+    "subtitle": "For constituency office use only.",
+    "email_label": "Email",
+    "password_label": "Password",
+    "sign_in": "Sign in",
+    "signing_in": "Signing in…",
+    "error": "Incorrect email or password.",
+    "demo_hint": "Demo credentials: mp@citizenpriority.gov / demo1234"
+  },
+  "nav": {
+    "map": "Hotspot map",
+    "priorities": "Priority list",
+    "logout": "Sign out"
+  },
+  "categories": {
+    "water_supply": "Water supply",
+    "road_damage": "Road damage",
+    "electricity": "Electricity",
+    "drainage": "Drainage",
+    "waste_management": "Waste management",
+    "street_lighting": "Street lighting"
+  },
+  "map": {
+    "loading": "Loading hotspots…",
+    "error": "Couldn't load hotspots. Try again.",
+    "missing_key_title": "Google Maps API key needed",
+    "missing_key_body": "Add VITE_GOOGLE_MAPS_API_KEY to a .env.local file to render the map.",
+    "filter_category": "Category",
+    "filter_category_all": "All categories",
+    "filter_constituency": "Constituency",
+    "filter_constituency_all": "All constituencies",
+    "filter_from": "From",
+    "filter_to": "To",
+    "filter_clear": "Clear filters",
+    "filter_empty": "No hotspots match these filters.",
+    "sidebar_reports": "reports",
+    "sidebar_last_updated": "Last reported",
+    "sidebar_top_complaints": "Top complaint excerpts",
+    "sidebar_view_priority": "View in priority list",
+    "sidebar_close": "Close"
   }
 }
