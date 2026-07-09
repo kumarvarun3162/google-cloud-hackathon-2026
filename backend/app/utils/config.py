@@ -1,8 +1,3 @@
-"""
-config.py — Single source of truth for all settings.
-Loaded once at startup; everything imports from here.
-"""
-
 from functools import lru_cache
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -14,25 +9,25 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    # Gemini (Google AI Studio — free tier)
     gemini_api_key:  str   = "REPLACE_ME"
     gemini_model:    str   = "gemini-1.5-flash"
 
-    # Firebase
     firebase_credentials_path: str  = "./firebase-credentials.json"
     firebase_project_id:       str  = "REPLACE_ME"
 
-    # App
     app_env:   str = "development"
     log_level: str = "INFO"
 
-    # Confidence thresholds
     confidence_threshold_low:  float = 0.50
     confidence_threshold_high: float = 0.80
 
-    # File limits
     max_audio_size_mb: int = 10
     max_image_size_mb: int = 5
+
+    # Phase 2 — clustering
+    # Cosine similarity threshold for joining an existing cluster (0.0–1.0)
+    # 0.72 catches paraphrases without false-merging unrelated topics
+    cluster_similarity_threshold: float = 0.72
 
     @property
     def is_development(self) -> bool:

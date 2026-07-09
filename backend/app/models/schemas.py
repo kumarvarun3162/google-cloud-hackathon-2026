@@ -1,19 +1,18 @@
 """
 schemas.py — All request/response data contracts for Phase 1.
 
-Design principles baked in here:
+Design principles:
   - Every AI-produced field ships with a `confidence` float (0.0–1.0).
   - Every AI label ships with an `override` field so the MP/operator can
-    correct it without touching the database directly.
-  - `processing_flags` is a list of machine-readable strings the frontend
-    can use to decide what UI to show (warn, block, ask_user, etc.).
+    correct it without re-running AI.
+  - `processing_flags` gives the frontend machine-readable signals
+    (warn, block, ask_user, show_override_ui, etc.).
 """
 
 from __future__ import annotations
-
 from enum import Enum
 from typing import Any
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field
 
 
 # ── Enums ─────────────────────────────────────────────────────────────────────
@@ -39,59 +38,53 @@ class IssueCategory(str, Enum):
 
 
 class ConfidenceLevel(str, Enum):
-    """Human-readable band derived from the float confidence score."""
     HIGH   = "high"    # >= 0.80
     MEDIUM = "medium"  # >= 0.50
     LOW    = "low"     # <  0.50
 
 
 class ProcessingFlag(str, Enum):
-    """
-    Machine-readable flags the frontend uses to drive UX decisions.
-    A response can carry multiple flags.
-    """
     OK                    = "ok"
-    LOW_CONFIDENCE        = "low_confidence"          # score < LOW threshold
-    TRANSLATION_USED      = "translation_used"        # content was translated
-    AUDIO_TRANSCRIBED     = "audio_transcribed"       # came in as audio
-    IMAGE_ANALYSED        = "image_analysed"          # came in as image
-    CONTENT_GUARDRAIL_HIT = "content_guardrail_hit"  # off-topic / harmful
-    LOCATION_INFERRED     = "location_inferred"       # location not explicit
-    OVERRIDE_APPLIED      = "override_applied"        # human corrected a label
-    SILENT_FALLBACK       = "silent_fallback"         # Gemini failed, rule used
+    LOW_CONFIDENCE        = "low_confidence"
+    TRANSLATION_USED      = "translation_used"
+    AUDIO_TRANSCRIBED     = "audio_transcribed"
+    IMAGE_ANALYSED        = "image_analysed"
+    CONTENT_GUARDRAIL_HIT = "content_guardrail_hit"
+    LOCATION_INFERRED     = "location_inferred"
+    OVERRIDE_APPLIED      = "override_applied"
+    SILENT_FALLBACK       = "silent_fallback"
 
 
 # ── Sub-models ────────────────────────────────────────────────────────────────
 
 class ConfidenceAnnotation(BaseModel):
-    """Wraps any AI-produced value with its confidence metadata."""
-    value:            Any
-    score:            float          = Field(..., ge=0.0, le=1.0, description="0.0–1.0 confidence from model")
-    level:            ConfidenceLevel
-    override:         Any | None     = Field(None, description="Human-corrected value; None = accept AI output")
-    override_by:      str | None     = None
-    is_ai_generated:  bool           = True
+    """Wraps any AI-produced value with confidence metadata + override slot."""
+    value:           Any
+    score:           float           = Field(..., ge=0.0, le=1.0)
+    level:           ConfidenceLevel
+    override:        Any | None      = Field(None)
+    override_by:     str | None      = None
+    is_ai_generated: bool            = True
 
     @property
     def effective_value(self) -> Any:
-        """Always use this in downstream logic — respects human override."""
+        """Always use this downstream — respects human override."""
         return self.override if self.override is not None else self.value
 
 
 class ExtractedIssue(BaseModel):
-    """One discrete problem found in the submission."""
-    description:    str
-    category:       ConfidenceAnnotation   # value = IssueCategory string
-    location_hint:  str | None = None      # e.g. "near X road", "ward 7"
-    severity_hint:  str | None = None      # e.g. "urgent", "long-standing"
+    description:   str
+    category:      ConfidenceAnnotation
+    location_hint: str | None = None
+    severity_hint: str | None = None
 
 
 class TranslationResult(BaseModel):
-    original_text:    str
-    detected_language: str           # BCP-47 code e.g. "hi", "te", "en"
-    detected_language_name: str      # human name e.g. "Hindi"
-    translated_text:  str | None     # None if source was already English
-    translation_confidence: float    = Field(..., ge=0.0, le=1.0)
+    original_text:           str
+    detected_language:       str
+    detected_language_name:  str
+    translated_text:         str | None
+    translation_confidence:  float = Field(..., ge=0.0, le=1.0)
 
 
 # ── Request models ─────────────────────────────────────────────────────────────
@@ -100,76 +93,116 @@ class TextSubmissionRequest(BaseModel):
     text:           str    = Field(..., min_length=5, max_length=5000)
     constituency:   str    = Field(..., min_length=2, max_length=100)
     submitter_name: str | None = None
-    hint_language:  str | None = None   # optional BCP-47 if frontend knows it
 
 
 class OverrideRequest(BaseModel):
-    """
-    MP / operator corrects an AI label after the fact.
-    Sent to PATCH /submissions/{id}/override
-    """
-    submission_id:    str
-    field_path:       str        # e.g. "issues[0].category"
-    corrected_value:  Any
-    override_by:      str        # operator ID or name
-    reason:           str | None = None
+    submission_id:   str
+    field_path:      str
+    corrected_value: Any
+    override_by:     str
+    reason:          str | None = None
 
 
 # ── Response models ────────────────────────────────────────────────────────────
 
 class ProcessingMetadata(BaseModel):
-    model_used:         str
-    processing_ms:      int
-    flags:              list[ProcessingFlag]
+    model_config = {"protected_namespaces": ()}
+
+    model_used:          str
+    processing_ms:       int
+    flags:               list[ProcessingFlag]
     guardrail_triggered: bool = False
-    guardrail_reason:   str | None = None
-    fallback_used:      bool = False
-    fallback_reason:    str | None = None
+    guardrail_reason:    str | None = None
+    fallback_used:       bool = False
+    fallback_reason:     str | None = None
 
 
 class SubmissionResponse(BaseModel):
-    """
-    The full deterministic response for one ingested submission.
-    This is what gets stored in Firestore and returned to the frontend.
-    """
-    submission_id:    str
-    submission_type:  SubmissionType
-    constituency:     str
-    submitter_name:   str | None
-
-    # ── Raw + translated content ──
-    translation:      TranslationResult
-
-    # ── AI-extracted intelligence ──
-    issues:           list[ExtractedIssue]
-    overall_confidence: float = Field(..., ge=0.0, le=1.0)
+    submission_id:            str
+    submission_type:          SubmissionType
+    constituency:             str
+    submitter_name:           str | None
+    translation:              TranslationResult
+    issues:                   list[ExtractedIssue]
+    overall_confidence:       float = Field(..., ge=0.0, le=1.0)
     overall_confidence_level: ConfidenceLevel
-
-    # ── Processing trace ──
-    metadata:         ProcessingMetadata
-
-    # ── Transcript (populated for audio submissions) ──
-    transcript:       str | None = None
-
-    # ── Image description (populated for image submissions) ──
-    image_description: str | None = None
-
-    created_at:       str   # ISO-8601
+    metadata:                 ProcessingMetadata
+    transcript:               str | None = None
+    image_description:        str | None = None
+    created_at:               str
 
 
 class StreamChunk(BaseModel):
-    """
-    One chunk sent over SSE during streaming ingestion.
-    `step` tells the frontend which processing stage just completed.
-    """
-    step:      str           # "transcribing" | "translating" | "extracting" | "storing" | "done"
-    status:    str           # "in_progress" | "complete" | "error"
-    message:   str           # human-readable status for UI
-    data:      Any | None    # partial or final payload
-    progress:  int           # 0–100 percent
+    step:     str
+    status:   str
+    message:  str
+    data:     Any | None
+    progress: int
 
 
 class ErrorResponse(BaseModel):
-    error:    str
-    detail:   str | None = None
-    flags:    list[ProcessingFlag] = []
+    error:  str
+    detail: str | None = None
+    flags:  list[ProcessingFlag] = []
+
+
+# ── Phase 2: Clustering schemas ───────────────────────────────────────────────
+
+class ClusterStatus(str, Enum):
+    ACTIVE   = "active"    # has live submissions
+    RESOLVED = "resolved"  # MP marked as handled
+    MERGED   = "merged"    # merged into another cluster
+
+
+class ClusterRecord(BaseModel):
+    """
+    One cluster = a group of similar citizen complaints about the same issue.
+    Stored in Firestore `clusters/` collection.
+    """
+    cluster_id:          str
+    constituency:        str
+    category:            str                  # IssueCategory value
+    title:               str                  # AI-generated 1-line title
+    summary:             str                  # AI-generated summary of all complaints
+    submission_ids:      list[str]            # all submissions in this cluster
+    submission_count:    int
+    centroid_embedding:  list[float]          # mean vector of all members
+    representative_text: str                  # most central submission's text
+    severity_distribution: dict[str, int]     # {"urgent": 3, "moderate": 5, ...}
+    confidence:          float = Field(..., ge=0.0, le=1.0)
+    confidence_level:    ConfidenceLevel
+    status:              ClusterStatus = ClusterStatus.ACTIVE
+    created_at:          str
+    updated_at:          str
+
+
+class ClusterAssignment(BaseModel):
+    """Result of assigning one submission to a cluster."""
+    submission_id:   str
+    cluster_id:      str
+    similarity_score: float = Field(..., ge=0.0, le=1.0)
+    is_new_cluster:  bool
+    cluster_size:    int
+
+
+class ClusterSummaryResponse(BaseModel):
+    """Lightweight cluster card for the dashboard list."""
+    cluster_id:       str
+    constituency:     str
+    category:         str
+    title:            str
+    summary:          str
+    submission_count: int
+    severity_hint:    str | None
+    confidence:       float
+    confidence_level: ConfidenceLevel
+    status:           ClusterStatus
+    created_at:       str
+    updated_at:       str
+
+
+class EmbeddingResult(BaseModel):
+    """Raw embedding output from Gemini Embedding API."""
+    text:       str
+    embedding:  list[float]
+    dimensions: int
